@@ -49,3 +49,16 @@ d3.select('body').selectAll('.box').data(random(), function(d){return d.city;}).
 ``
 d3.select('svg').selectAll('.box').data(random(), function(d){return d.city;}).call(function(s){ var g = s.enter().append('g').attr('class', 'box'); g.append('rect').attr('height', 18);; g.append('text').attr('y', 15).text(function(d){ return d.city; })}).call(function(s){s.transition().duration(duration).attr('transform', function(d, i){ return 'translate(10, '+i * 20+')'; }).select('rect').attr('width', function(d){ return d.value * 100; })}).call(function(s){s.exit().transition().duration(duration).attr('transform', 'translate(10, 2000)').remove();})
 ``
+
+## a word snake
+
+How would it be to play with an existing text with d3? the `words.html` is
+slightly modified to help for this, and the corresponding "snake" is the
+following
+
+``
+d3.select('.text').selectAll('span').data(random(words), function(d){return d ? d.label : d3.select(this).text().trim();}).call(function(s){s.enter().append('span').text(function(d){return d.label+' ';}).transition().duration(duration).style('opacity', 1);}).call(function(s){ s.exit().transition().duration(duration).style('opacity', 0).remove()})
+``
+
+Where a little trick helps to have a valid key value also for elements
+preexisting in the page, not generated with d3.

@@ -6,22 +6,14 @@
     </script>
     <script>
             duration = 2000;
-            var words = [
-                'Each',
-                'word',
-                'here',
-                'is',
-                'a',
-                'selectable',
-                'span,',
-                'so',
-                'you',
-                'can',
-                'play',
-                'with',
-                'it',
-                '...'
-            ];
+            var snake = "d3.select('.text').selectAll('span').data(random(words), function(d){return d ? d.label : d3.select(this).text().trim();}).call(function(s){s.enter().append('span').text(function(d){return d.label+' ';}).transition().duration(duration).style('opacity', 1);}).call(function(s){ s.exit().transition().duration(duration).style('opacity', 0).remove()})";
+            var text = 'Each word here is a selectable span, so you can play with it ... for example, with '+snake;
+            var words = text.split(' ');
+            window.onload = function(){
+                words.forEach(function(word){
+                    d3.select('.text').append('span').text(word+' ');
+                });
+            };
             var cities = [
                 'Rome',
                 'Madrid',
@@ -75,22 +67,7 @@
     </style>
   </head>
   <body>
-    <div class="text">
-        <span>Each</span>
-        <span>word</span>
-        <span>here</span>
-        <span>is</span>
-        <span>a</span>
-        <span>selectable</span>
-        <span>span,</span>
-        <span>so</span>
-        <span>you</span>
-        <span>can</span>
-        <span>play</span>
-        <span>with</span>
-        <span>it</span>
-        <span>...</span>
-    </div>
+    <div class="text"></div>
     <svg height="400" width="400"></svg>
   </body>
 </html>

@@ -52,7 +52,8 @@ d3.select('svg').selectAll('.box').data(random(), function(d){return d.city;}).c
 
 ## a word snake
 
-How would it be to play with an existing text with d3? the `words.html` is
+How would it be to play with an existing text with d3? the <a
+href="http://danse.github.io/d3-playground/words.html">words.html</a> is
 slightly modified to help for this, and the corresponding "snake" is the
 following
 

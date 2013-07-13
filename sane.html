@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>D3 playground</title>
+    <script type="text/javascript" src="components/d3/d3.js">
+    </script>
+    <script>
+            duration = 2000;
+            var cities = [
+                'Rome',
+                'Madrid',
+                'Berlin',
+                'Paris',
+                'Lisbon',
+                'London',
+                'Oslo',
+                'Stockolm',
+                'Helsinki',
+                'Kiev',
+                'Krakov',
+                'Athens',
+                'Istanbul',
+                'Amsterdam',
+                'Vienna',
+            ];
+            function random(){
+                var r = [];
+                cities.forEach(function(city){
+                    if(Math.round(Math.random())) {
+                        r.push({
+                            city: city,
+                            value: Math.random()
+                        });
+                    }
+                });
+                console.log(JSON.stringify(r));
+                return r;
+            };
+            function update(){
+                var s = d3.select('body').selectAll('.box')
+                    .data(random(), function(d){return d.city;});
+                    
+                s.style('border', '1px solid black')
+                    .transition().duration(duration)
+                        .style('top', function(d, i){return 50+i*30;})
+                        .transition().duration(2*duration)
+                            .style('width', function(d){ return d.value*200; });
+
+                s.enter().append('div').attr('class', 'box')
+                    .text(function(d){return d.city;})
+                    .style('top', function(d, i){return 50+i*30;})
+                    .transition().duration(duration).delay()
+                        .style('width', function(d){return d.value*200;});
+                        
+                s.exit().transition().duration(duration)
+                    .style('top', 2000).remove();
+            };
+    </script>
+    <style type="text/css">
+      div.box {
+        position: absolute;
+        left: 50px;
+        background-color: skyblue;
+        width: 0;
+        height: 18px;
+        padding: 4px;
+        margin: 1px;
+      }
+      g.box rect {
+        fill: skyblue;
+      }
+      g.box text {
+        fill: black;
+      }
+    </style>
+  </head>
+  <body>
+    <svg height="400" width="400"></svg>
+  </body>
+</html>
+

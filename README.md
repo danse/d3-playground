@@ -31,6 +31,9 @@ transition for the different selections.
 d3.select('body').selectAll('.box').data(random(), function(d){return d.city;}).call(function(s){s.style('border', '1px solid black').transition().duration(duration).style('top', function(d, i){return 50+i*30;}).transition().duration(2*duration).style('width', function(d){ return d.value*200; });}).call(function(s){s.enter().append('div').attr('class', 'box').text(function(d){return d.city;}).style('top', function(d, i){return 50+i*30;}).transition().duration(duration).delay().style('width', function(d){return d.value*200;});}).call(function(s){s.exit().transition().duration(duration).style('top', 2000).remove();})
 ``
 
+This snake is available, translated in a sane version, in the `update` method
+in the `sane.html` file.
+
 ## slightly better
 
 The snake can be shortened merging the enter and create selection, although

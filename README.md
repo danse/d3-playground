@@ -44,5 +44,5 @@ d3.select('body').selectAll('.box').data(random(), function(d){return d.city;}).
 ## the vectorial snake
 
 ``
-d3.select('svg').selectAll('.box').data(random(), function(d){return d.city;}).call(function(s){s.style('border', '1px solid black').transition().duration(duration).attr('y', function(d, i){return 50+i*30;}).transition().duration(2*duration).attr('width', function(d){ return d.value*200; });}).call(function(s){s.enter().append('rect').attr('class', 'box').attr('height', 30).text(function(d){return d.city;}).attr('y', function(d, i){return 50+i*30;}).transition().duration(duration).delay().attr('width', function(d){return d.value*200;});}).call(function(s){s.exit().transition().duration(duration).attr('y', 2000).remove();})
+d3.select('svg').selectAll('.box').data(random(), function(d){return d.city;}).call(function(s){ var g = s.enter().append('g').attr('class', 'box'); g.append('rect').attr('height', 18);; g.append('text').attr('y', 15).text(function(d){ return d.city; })}).call(function(s){s.transition().duration(duration).attr('transform', function(d, i){ return 'translate(10, '+i * 20+')'; }).select('rect').attr('width', function(d){ return d.value * 100; })}).call(function(s){s.exit().transition().duration(duration).attr('transform', 'translate(10, 2000)').remove();})
 ``

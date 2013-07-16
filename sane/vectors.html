@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8">
     <title>D3 playground</title>
-    <script type="text/javascript" src="components/d3/d3.js">
+    <script type="text/javascript" src="../components/d3/d3.js">
     </script>
     <script>
             duration = 2000;
@@ -36,19 +36,37 @@
                 console.log(JSON.stringify(r));
                 return r;
             };
+            function update() {
+                var selection = d3.select('svg').selectAll('.box')
+                    .data(random(), function(d){return d.city;});
+
+                var g = selection.enter().append('g').attr('class', 'box');
+                
+                g.append('rect').attr('height', 18);
+                g.append('text').attr('y', 15)
+                    .text(function(d){ return d.city; });
+                
+                selection.transition().duration(duration)
+                    .attr('transform', function(d, i){
+                        return 'translate(10, '+i * 20+')';
+                    }).select('rect')
+                        .attr('width', function(d){ return d.value * 100; });
+                
+                selection.exit().transition().duration(duration)
+                    .attr('transform', 'translate(10, 2000)').remove();
+            }
     </script>
     <style type="text/css">
-      div {
-        position: absolute;
-        left: 50px;
-        background-color: skyblue;
-        height: 18px;
-        padding: 4px;
-        margin: 1px;
+      g.box rect {
+        fill: skyblue;
+      }
+      g.box text {
+        fill: black;
       }
     </style>
   </head>
   <body>
+    <svg height="400" width="400"></svg>
   </body>
 </html>
 

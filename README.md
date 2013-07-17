@@ -63,3 +63,7 @@ d3.select('.text').selectAll('span').data(random(words), function(d){return d ? 
 
 Where a little trick helps to have a valid key value also for elements
 preexisting in the page, not generated with d3.
+
+## Where this crazyness started
+
+See also the presentation that lead to this repo: <https://github.com/danse/18>
